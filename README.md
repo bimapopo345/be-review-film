@@ -1,66 +1,163 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# be-review-film
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web application for managing reviews and information about films, including functionalities for user authentication, film details, and reviews.
 
-## About Laravel
+## Features and Functionality
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Authentication**: Registration, login, logout, and email verification using OTP.
+- **Film Management**: Create, read, update, and delete film entries, including titles, summaries, and posters.
+- **Genre Management**: Manage film genres.
+- **Cast Management**: Manage film cast, including names and bios.
+- **Reviews**: Users can submit reviews and ratings for films.
+- **Role Management**: Admins can manage user roles and permissions.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technology Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel (PHP Framework)
+- **Database**: MySQL (or SQLite)
+- **API**: RESTful API for frontend interaction
+- **Authentication**: JWT (JSON Web Tokens)
+- **Cloud Storage**: Cloudinary for image uploads
+- **Email**: Sending OTP and notifications via mail
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.0
+- Composer
+- Node.js (for front-end asset management)
+- Database server (MySQL or SQLite)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Installation Instructions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/bimapopo345/be-review-film.git
+   cd be-review-film
+   ```
 
-## Laravel Sponsors
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Install Node.js dependencies** (if applicable):
+   ```bash
+   npm install
+   ```
 
-### Premium Partners
+4. **Set up the environment file**:
+   Copy `.env.example` to `.env` and configure your database and mail settings.
+   ```bash
+   cp .env.example .env
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+5. **Generate application key**:
+   ```bash
+   php artisan key:generate
+   ```
 
-## Contributing
+6. **Run migrations**:
+   ```bash
+   php artisan migrate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. **Seed the database** (optional):
+   ```bash
+   php artisan db:seed
+   ```
 
-## Code of Conduct
+8. **Serve the application**:
+   ```bash
+   php artisan serve
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Usage Guide
 
-## Security Vulnerabilities
+- **Authentication**:
+  - Register a new user: `POST /api/v1/auth/register`
+  - Login: `POST /api/v1/auth/login`
+  - Logout: `POST /api/v1/auth/logout`
+  - Generate OTP for email verification: `POST /api/v1/auth/generate-otp-code`
+  - Verify email with OTP: `POST /api/v1/auth/verification-email`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Film Management**:
+  - Get all films: `GET /api/v1/movie`
+  - Get a specific film: `GET /api/v1/movie/{id}`
+  - Create a new film: `POST /api/v1/movie`
+  - Update a film: `PUT /api/v1/movie/{id}`
+  - Delete a film: `DELETE /api/v1/movie/{id}`
 
-## License
+- **Genre Management**:
+  - Get all genres: `GET /api/v1/genre`
+  - Create a new genre: `POST /api/v1/genre`
+  - Update a genre: `PUT /api/v1/genre/{id}`
+  - Delete a genre: `DELETE /api/v1/genre/{id}`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Cast Management**:
+  - Get all casts: `GET /api/v1/cast`
+  - Create a new cast: `POST /api/v1/cast`
+  - Update a cast: `PUT /api/v1/cast/{id}`
+  - Delete a cast: `DELETE /api/v1/cast/{id}`
+
+- **Review Management**:
+  - Submit a review: `POST /api/v1/review`
+
+## API Documentation
+
+API endpoints are organized under the `/api/v1` prefix. Make sure to include authentication tokens where required.
+
+### Example Request for User Registration
+
+```json
+POST /api/v1/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "password_confirmation": "password123"
+}
+```
+
+### Example Response
+
+```json
+{
+  "message": "User berhasil di-register",
+  "user": {
+    "id": "uuid",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "email_verified_at": null,
+    "created_at": "2024-01-01T00:00:00.000000Z",
+    "updated_at": "2024-01-01T00:00:00.000000Z"
+  }
+}
+```
+
+## Contributing Guidelines
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix:
+   ```bash
+   git checkout -b feature/my-feature
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/my-feature
+   ```
+5. Create a pull request.
+
+## License Information
+
+No specific license information is provided. Please check the repository for any updates regarding licensing.
+
+## Contact/Support Information
+
+For support or inquiries, please open an issue in the GitHub repository:
+[be-review-film Issues](https://github.com/bimapopo345/be-review-film/issues)
