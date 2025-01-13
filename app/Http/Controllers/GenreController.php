@@ -32,16 +32,17 @@ class GenreController extends Controller
     }
 
     public function show($id)
-    {
-        $genre = Genre::find($id);
-        if (!$genre) {
-            return response()->json(['message' => 'Genre tidak ditemukan'], 404);
-        }
-        return response()->json([
-            'message' => 'Detail Data Genre',
-            'data' => $genre
-        ], 200);
+{
+    $genre = Genre::with('movies')->find($id);
+    if (!$genre) {
+        return response()->json(['message' => 'Genre tidak ditemukan'], 404);
     }
+    return response()->json([
+        'message' => 'Detail Data Genre',
+        'data' => $genre
+    ], 200);
+}
+
 
     public function update(Request $request, $id)
     {

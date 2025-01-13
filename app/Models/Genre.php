@@ -19,5 +19,10 @@ class Genre extends Model
         'id',
         'name'
     ];
+
+    public function movies()
+{
+    return $this->hasMany(Movie::class, 'genre_id');
+}
 }
 

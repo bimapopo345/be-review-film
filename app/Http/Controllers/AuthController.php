@@ -127,6 +127,7 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Invalid credentials'], 401);
             }
             $user = auth()->guard('api')->user();
+            
             return response()->json([
                 'message' => 'User berhasil login',
                 'user' => $user,
